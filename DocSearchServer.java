@@ -53,6 +53,20 @@ class Handler implements URLHandler {
                result = String.join("\n", foundPaths);
                return String.format("Found %d paths:\n%s", foundPaths.size(), result);
            }
+           else if(parameters[0].equals("title")){
+            List<String> pathsAsStrings = new ArrayList<>();
+            for(File f: paths){
+                pathsAsStrings.add(f.toString());
+            }
+            List<String> found = new ArrayList<>();
+            for(String s: pathsAsStrings){
+                if(s.contains(parameters[1])){
+                    found.add(s);
+                }
+            }
+            String res = String.join("\n", found);
+            return String.format("Found %d files:\n %s", found.size(), res);
+           }
            else {
                return "Couldn't find query parameter q";
            }
